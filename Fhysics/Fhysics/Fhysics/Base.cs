@@ -12,9 +12,10 @@ namespace Fhysics
     public class Base
     {
         Texture2D texture;
-        Vector2 velo; 
-        Rectangle rec;
-        Color color;
+        
+        protected Vector2 velo; 
+        protected Rectangle rec;
+        protected Color color = Color.White;
 
         public Vector2 Position
         {

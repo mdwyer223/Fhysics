@@ -14,10 +14,11 @@ namespace Fhysics
     {
         KeyboardState keys, oldKeys;
 
-        public Player(Rectangle rec, Color color)
-            :base(rec)
+        public Player(Vector2 pos, Color color)
+            :base(new Rectangle((int)pos.X, (int)pos.Y, 20,20))
         {
             keys = oldKeys = Keyboard.GetState();
+            this.color = color;
         }
 
         public override void Update(GameTime gameTime)

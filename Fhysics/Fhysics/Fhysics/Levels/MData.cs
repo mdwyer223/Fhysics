@@ -29,10 +29,26 @@ namespace Fhysics
 
         public virtual void Update(GameTime gameTime)
         {
+            for (int i = 0; i < objs.Count; i++)
+            {
+                if (objs[i] != null)
+                {
+                    objs[i].Update(gameTime);
+                }
+            }
         }
 
         public virtual void Draw(SpriteBatch spriteBatch)
         {
+            foreach (Base b in objs)
+            {
+                b.Draw(spriteBatch);
+            }
+        }
+
+        public void addObject(Base o)
+        {
+            objs.Add(o);
         }
     }
 }

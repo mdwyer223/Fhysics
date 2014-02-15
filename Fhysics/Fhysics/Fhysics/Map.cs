@@ -15,5 +15,25 @@ namespace Fhysics
 {
     public class Map
     {
+        Player player;
+        MData data;
+
+        public Map(Player p, MData data)
+        {
+            player = p;
+            this.data = data;
+        }
+
+        public void Update(GameTime gameTime)
+        {
+            player.Update(gameTime);
+            data.Update(gameTime);
+        }
+
+        public void Draw(SpriteBatch spriteBatch)
+        {
+            player.Draw(spriteBatch);
+            data.Draw(spriteBatch);
+        }
     }
 }

@@ -11,5 +11,15 @@ namespace Fhysics
 {
     public class Wall : Base
     {
+        public Wall(Rectangle rec)
+            : base(rec)
+        {
+
+        }
+
+        public override void Draw(SpriteBatch spriteBatch)
+        {
+            //Dont draw
+        }
     }
 }
