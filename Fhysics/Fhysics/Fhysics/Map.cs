@@ -18,6 +18,16 @@ namespace Fhysics
         Player player;
         MData data;
 
+        public Player Player
+        {
+            get { return player; }
+        }
+
+        public MData mData
+        {
+            get { return data; }
+        }
+
         public Map(Player p, MData data)
         {
             player = p;
@@ -26,8 +36,8 @@ namespace Fhysics
 
         public void Update(GameTime gameTime)
         {
-            player.Update(gameTime);
-            data.Update(gameTime);
+            player.Update(gameTime, this);
+            data.Update(gameTime, this);
         }
 
         public void Draw(SpriteBatch spriteBatch)

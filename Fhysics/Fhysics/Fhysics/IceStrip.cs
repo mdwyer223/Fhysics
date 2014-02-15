@@ -17,7 +17,7 @@ namespace Fhysics
             color = Color.LightBlue;
         }
 
-        public override void Update(GameTime gameTime)
+        public override void Update(GameTime gameTime, Map data)
         {
         }
 
