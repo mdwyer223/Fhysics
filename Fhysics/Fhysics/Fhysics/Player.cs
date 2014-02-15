@@ -16,6 +16,17 @@ namespace Fhysics
 
         KeyboardState keys, oldKeys;
 
+        public bool IsDead
+        {
+            get { return isDead; }
+            set { isDead = value; }
+        }
+
+        public Vector2 Velocity
+        {
+            get { return velo; }
+        }
+
         public Player(Vector2 pos, Color color)
             : base(new Rectangle((int)pos.X, (int)pos.Y, 20, 20))
         {
@@ -26,6 +37,8 @@ namespace Fhysics
         public override void Update(GameTime gameTime, Map data)
         {
             keys = Keyboard.GetState();
+            if (isDead)
+                return;
 
             // Movement code
             const int SPEED = 3;
@@ -50,12 +63,15 @@ namespace Fhysics
                 //ice
                 //vel*= .95f;
                 velo = Vector2.Zero;
-            }            
+            }
+            
             
             // check for death
             // if half over a gap
             // isDead = true
+            
             base.Update(gameTime, data);
+            oldKeys = keys;
         }
 
     }
