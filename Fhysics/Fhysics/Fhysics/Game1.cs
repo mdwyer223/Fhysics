@@ -19,10 +19,20 @@ namespace Fhysics
         GraphicsDeviceManager graphics;
         SpriteBatch spriteBatch;
 
+        //make a timer
+
+        static ContentManager gameContent;
+        public static ContentManager GameContent
+        {
+            get { return gameContent; }
+        }
+
         public Game1()
         {
             graphics = new GraphicsDeviceManager(this);
             Content.RootDirectory = "Content";
+
+            gameContent = Content;
         }
 
         /// <summary>
