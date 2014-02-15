@@ -11,10 +11,10 @@ namespace Fhysics
 {
     public class Base
     {
-        Texture2D texture;
-        Vector2 velo; 
-        Rectangle rec;
-        Color color;
+        protected Texture2D texture;
+        protected Vector2 velo; 
+        protected Rectangle rec;
+        protected Color color;
 
         public Vector2 Position
         {
@@ -40,7 +40,7 @@ namespace Fhysics
 
         public virtual void Update(GameTime gameTime)
         {
-
+            Position += velo;
         }
 
         public virtual void Draw(SpriteBatch spriteBatch)

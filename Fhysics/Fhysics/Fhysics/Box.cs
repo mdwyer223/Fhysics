@@ -15,8 +15,8 @@ namespace Fhysics
     {
         List<Directions> directions;
 
-        public Box(Rectangle rec, List<Directions> d)
-            : base(rec)
+        public Box(Vector2 pos, List<Directions> d)
+            : base(new Rectangle((int)pos.X, (int)pos.Y, 20, 20))
         {
             directions = d;
         }
@@ -29,7 +29,7 @@ namespace Fhysics
         public override void Draw(SpriteBatch spriteBatch)
         {
             //might change colors
-            //arrow
+            //arrow rotation
             base.Draw(spriteBatch);
         }
     }
