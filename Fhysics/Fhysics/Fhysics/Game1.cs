@@ -28,12 +28,27 @@ namespace Fhysics
             get { return gameContent; }
         }
 
+        static int displayHeight, displayWidth;
+        public static int DisplayHeight
+        {
+            get
+            {
+                return displayHeight;
+            }
+        }
+        public static int DisplayWidth
+        {
+            get { return displayWidth; }
+        }
+
         public Game1()
         {
             graphics = new GraphicsDeviceManager(this);
             Content.RootDirectory = "Content";
 
             gameContent = Content;
+            displayWidth = GraphicsDevice.Viewport.Width;
+            displayHeight = GraphicsDevice.Viewport.Height;
         }
 
         protected override void Initialize()

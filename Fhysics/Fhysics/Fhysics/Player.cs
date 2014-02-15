@@ -23,7 +23,7 @@ namespace Fhysics
             this.color = color;
         }
 
-        public override void Update(GameTime gameTime)
+        public override void Update(GameTime gameTime, Map data)
         {
             keys = Keyboard.GetState();
 
@@ -55,6 +55,7 @@ namespace Fhysics
             // check for death
             // if half over a gap
             // isDead = true
+            base.Update(gameTime, data);
         }
 
     }

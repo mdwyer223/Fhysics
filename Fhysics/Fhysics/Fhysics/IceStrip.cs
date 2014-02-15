@@ -9,7 +9,7 @@ using Microsoft.Xna.Framework.Graphics;
 
 namespace Fhysics
 {
-    public class IceStrip : Base
+    public class IceStrip : GroundObj
     {
         public IceStrip(Rectangle rec)
             : base(rec)

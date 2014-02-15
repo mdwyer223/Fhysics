@@ -112,6 +112,7 @@
     <Compile Include="Fan.cs" />
     <Compile Include="Gap.cs" />
     <Compile Include="Goal.cs" />
+    <Compile Include="GroundObj.cs" />
     <Compile Include="IceStrip.cs" />
     <Compile Include="Levels\Level1.cs" />
     <Compile Include="Map.cs" />

@@ -9,7 +9,7 @@ using Microsoft.Xna.Framework.Graphics;
 
 namespace Fhysics
 {
-    public class Goal : Base
+    public class Goal : GroundObj
     {
         public Goal(Rectangle rec) : base(rec) { }
     }

@@ -38,7 +38,7 @@ namespace Fhysics
             texture = Game1.GameContent.Load<Texture2D>("white");
         }
 
-        public virtual void Update(GameTime gameTime)
+        public virtual void Update(GameTime gameTime, Map data)
         {
             Position += velo;
         }
