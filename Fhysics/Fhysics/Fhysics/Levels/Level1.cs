@@ -19,10 +19,14 @@ namespace Fhysics
             : base()
         {
             List<Directions> d = new List<Directions>();
-            Directions dActual = Directions.RIGHT;
+            Directions dActual = Directions.LEFT;
             d.Add(dActual);
-            Box b = new Box(new Vector2(390, 230), d, true);
-            addObject(b);
+            addObject(new Box(new Vector2(360, 230), Directions.RIGHT, true));
+            addObject(new Box(new Vector2(300, 230), Directions.RIGHT, true));
+            addObject(new Box(new Vector2(240, 230), Directions.RIGHT, true));
+            addObject(new Box(new Vector2(180, 230), Directions.RIGHT, true));
+            addObject(new Box(new Vector2(120, 260), Directions.ALL, true));
+            addObject(new Box(new Vector2(120, 60), Directions.NONE, true));
         }
     }
 }

@@ -46,13 +46,15 @@ namespace Fhysics
             graphics = new GraphicsDeviceManager(this);
             Content.RootDirectory = "Content";
 
-            gameContent = Content;
-            displayWidth = GraphicsDevice.Viewport.Width;
-            displayHeight = GraphicsDevice.Viewport.Height;
         }
 
         protected override void Initialize()
         {
+
+            gameContent = Content;
+            displayWidth = GraphicsDevice.Viewport.Width;
+            displayHeight = GraphicsDevice.Viewport.Height;
+
             Player player = new Player(new Vector2(0, 230), Color.Purple);
             Level1 l1 = new Level1();
             map = new Map(player, l1);
