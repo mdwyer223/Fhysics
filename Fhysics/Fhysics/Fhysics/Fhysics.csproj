@@ -120,6 +120,7 @@
     <Compile Include="Map.cs" />
     <Compile Include="Levels\MData.cs" />
     <Compile Include="Particle.cs" />
+    <Compile Include="PauseScreen.cs" />
     <Compile Include="Player.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Program.cs" />

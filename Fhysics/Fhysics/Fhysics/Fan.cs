@@ -17,10 +17,12 @@ namespace Fhysics
         List<Particle> particles;
         Vector2 appliedVelo;
 
-        Rectangle zone;
+        Rectangle zone, oldZone;
 
         int spawnTime, spawnTimer;
         const int MAX_SIZE = 4, MIN_SIZE = 2;
+
+        bool objInZone;
 
         public Fan(Rectangle rec, Orientation d)
             : base(rec)
@@ -49,10 +51,14 @@ namespace Fhysics
                 zone = new Rectangle(rec.X, rec.Y, rec.Width, Game1.DisplayHeight - rec.Y);
                 appliedVelo = new Vector2(0, 5);
             }
+
+            oldZone = zone;
         }
 
         public override void Update(GameTime gameTime, Map data)
         {
+            objInZone = false;
+
             if(spawnTimer < spawnTime)
             {
                 spawnTimer++;
@@ -77,14 +83,98 @@ namespace Fhysics
             List<Base> objs = data.Data.AllObjects;
             for (int j = 0; j < objs.Count; j++)
             {
-                if (objs[j].GetType() != typeof(Fan) &&
-                    objs[j].GetType() != typeof(Gap))
+                if (objs[j].GetType() == typeof(Box))
                 {
-                    if (objs[j].Rec.Intersects(zone))
+                    Box b = (Box)objs[j];
+                    if (b.Rec.Intersects(zone))
                     {
-                        objs[j].Position += appliedVelo;
+                        switch (direction)
+                        {
+                            case Orientation.UP:
+                                {
+                                    if (b.Direcs.Contains(Directions.DOWN))
+                                    {
+                                        zone.Y = b.Rec.Y;
+                                        zone.Height = rec.Y - zone.Y;
+                                        objInZone = true;
+                                    }
+                                    else if (b.Direcs.Contains(Directions.NONE))
+                                    {
+                                        //does nothing
+                                    }
+                                    else
+                                    {
+                                        b.Position += appliedVelo;
+                                    }
+                                    break;
+                                }
+                            case Orientation.DOWN:
+                                {
+                                    if (b.Direcs.Contains(Directions.TOP))
+                                    {
+                                        zone.Height = b.Rec.Y - zone.Y;
+                                        objInZone = true;
+                                    }
+                                    else if (b.Direcs.Contains(Directions.NONE))
+                                    {
+                                        //does nothing
+                                    }
+                                    else
+                                    {
+                                        b.Position += appliedVelo;
+                                    }
+                                    break;
+                                }
+                            case Orientation.RIGHT:
+                                {
+                                    if (b.Direcs.Contains(Directions.LEFT))
+                                    {
+                                        zone.Width = b.Rec.X - zone.X;
+                                        objInZone = true;
+                                    }
+                                    else if (b.Direcs.Contains(Directions.NONE))
+                                    {
+                                        //does nothing
+                                    }
+                                    else
+                                    {
+                                        b.Position += appliedVelo;
+                                    }
+                                    break;
+                                }
+                            case Orientation.LEFT:
+                                {
+                                    if (b.Direcs.Contains(Directions.RIGHT))
+                                    {
+                                        zone.X = b.Rec.X;
+                                        zone.Width = rec.X - b.Rec.X;
+                                        objInZone = true;
+                                    }
+                                    else if (b.Direcs.Contains(Directions.NONE))
+                                    {
+                                        //does nothing
+                                    }
+                                    else
+                                    {
+                                        b.Position += appliedVelo;
+                                    }
+                                    break;
+                                }
+                        }
                     }
                 }
+                //if (objs[j].GetType() != typeof(Fan) &&
+                //    objs[j].GetType() != typeof(Gap))
+                //{
+                //    if (objs[j].Rec.Intersects(zone))
+                //    {
+                //        objs[j].Position += appliedVelo;
+                //    }
+                //}
+            }
+            if (!objInZone)
+            {
+                zone = oldZone;
             }
             //base.Update(gameTime, data);
         }

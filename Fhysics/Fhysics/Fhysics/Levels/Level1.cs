@@ -18,14 +18,20 @@ namespace Fhysics
         public Level1()
             : base()
         {
-            //List<Directions> d = new List<Directions>();
-            //Directions dActual = Directions.RIGHT;
-            //d.Add(dActual);
+            List<Directions> d = new List<Directions>();
+            Directions dActual = Directions.NONE;
+            d.Add(dActual);
 
-            //addObject(new Gap(new Rectangle(500, 0, 25, Game1.DisplayHeight)));
-
-            IceStrip ice = new IceStrip(new Rectangle(240, 240, 50, 50));
-            addObject(ice);
+            Box b = new Box(new Vector2(350, 90), d, true);
+            addObject(b);
+            b = new Box(new Vector2(500, 151), d, true);
+            addObject(b);
+            b = new Box(new Vector2(400, 261), d, true);
+            addObject(b);
+            b = new Box(new Vector2(320, 400), d, true);
+            addObject(b);
+            b = new Box(new Vector2(620, 321), d, true);
+            addObject(b);
 
             addObject(new Goal(new Rectangle(700, 230, 20, 20)));
             messageText = "W, A, S, D movement (Up, Left, Down, Right)";
@@ -34,15 +40,24 @@ namespace Fhysics
         public Level1(Player p)
             : base(p)
         {
-            //List<Directions> d = new List<Directions>();
-            //Directions dActual = Directions.RIGHT;
-            //d.Add(dActual);
+            List<Directions> d = new List<Directions>();
+            Directions dActual = Directions.NONE;
+            d.Add(dActual);
+            
+            Box b = new Box(new Vector2(350, 90), d, true);
+            addObject(b);
+            b = new Box(new Vector2(500, 151), d, true);
+            addObject(b);
+            b = new Box(new Vector2(400, 261), d, true);
+            addObject(b);
+            b = new Box(new Vector2(320, 400), d, true);
+            addObject(b);
+            b = new Box(new Vector2(620, 321), d, true);
+            addObject(b);
 
-            //addObject(new Gap(new Rectangle(500, 0, 25, Game1.DisplayHeight)));
             addObject(new Goal(new Rectangle(700, 230, 20, 20)));
 
-            //Box b = new Box(new Vector2(390, 230), d, true);
-            //addObject(b);
+            
 
             //Fan f = new Fan(new Rectangle(200, 100, 50, 50), Orientation.RIGHT);
             //addObject(f);

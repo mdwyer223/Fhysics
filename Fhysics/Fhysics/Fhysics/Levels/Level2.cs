@@ -18,29 +18,32 @@ namespace Fhysics
         public Level2(Player p)
             : base(p)
         {
-            List<Directions> d = new List<Directions>();
-            Directions dActual = Directions.RIGHT;
-            d.Add(dActual);
+            Directions d = Directions.RIGHT;
+            bool push = true;
 
-            Box b = new Box(new Vector2(50, 230), d, true);
-            addObject(b);
+            Vector2 pos = new Vector2(400, 0);
+            for (int i = 0; i < 24; i++)
+            {
+                Box b = new Box(pos, d, push);
+                addObject(b);
+                if (d == Directions.RIGHT)
+                {
+                    d = Directions.LEFT;
+                    push = false;
+                }
+                else
+                {
+                    d = Directions.RIGHT;
+                    push = true;
+                }
 
-            Fan f = new Fan(new Rectangle(100, 100, 50, 50), Orientation.RIGHT);
-            addObject(f);
+                pos.Y += 25;
+            }
 
-            f = new Fan(new Rectangle(200, 440, 50, 50), Orientation.UP);
-            addObject(f);
-
-            f = new Fan(new Rectangle(600, 25, 50, 50), Orientation.DOWN);
-            addObject(f);
-
-            f = new Fan(new Rectangle(650, 380, 50, 50), Orientation.LEFT);
-            addObject(f);
-
-            Turret t = new Turret(new Rectangle(Game1.DisplayWidth / 2, Game1.DisplayHeight / 2, 25, 25));
-            addObject(t);
-
+            addObject(new Goal(new Rectangle(700, 230, 20, 20)));
             p.Position = new Vector2(5, 230);
+            messageText = "Hold shift to pull, walk to push";
+
         }
     }
 }

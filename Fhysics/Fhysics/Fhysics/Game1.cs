@@ -17,6 +17,7 @@ namespace Fhysics
     {
         GraphicsDeviceManager graphics;
         SpriteBatch spriteBatch;
+        PauseScreen pause;
         EndScreen end;
         Map map;
 
@@ -25,7 +26,7 @@ namespace Fhysics
 
         //make a timer
         static string timer;
-        float minutes, seconds;
+        float minutes, seconds, miliseconds, minutesDeduction, secondsDeduction;
         SpriteFont timeFont;
 
         static ContentManager gameContent;
@@ -90,6 +91,8 @@ namespace Fhysics
             Level1 l1 = new Level1();
             map = new Map(player, l1);
 
+            pause = new PauseScreen(map);
+
             base.Initialize();
         }
 
@@ -111,9 +114,16 @@ namespace Fhysics
             }
             else if (State == GameState.PLAYING)
             {
+                miliseconds += gameTime.ElapsedGameTime.Milliseconds / 1000f;
                 map.Update(gameTime);
-                seconds = gameTime.TotalGameTime.Seconds;
-                minutes = gameTime.TotalGameTime.Minutes;
+                seconds = (int)miliseconds;
+                minutes = seconds / 60;
+
+                if (miliseconds > 60)
+                {
+                    miliseconds = 0f;
+                }
+
                 if (seconds < 10)
                 {
                     timer = "" + (int)minutes + ":0" + (int)seconds;
@@ -127,10 +137,19 @@ namespace Fhysics
             {
                 end = new EndScreen(LevelPassed);
                 end.Update(gameTime);
+                if (end.Restart)
+                {
+                    restartGame();
+                }
             }
             else if (State == GameState.PAUSE)
             {
+                pause.Update(gameTime);
 
+                if (pause.Quit)
+                {
+                    this.Exit();
+                }
             }
 
             base.Update(gameTime);
@@ -165,12 +184,26 @@ namespace Fhysics
             }
             else if (State == GameState.PAUSE)
             {
-
+                spriteBatch.Begin();
+                pause.Draw(spriteBatch);
+                spriteBatch.End();
             }
 
-            
-
             base.Draw(gameTime);
+        }
+
+        public void restartGame()
+        {
+            Player player = new Player(new Vector2(5, 230), Color.Purple);
+
+            Level1 l1 = new Level1();
+            map = new Map(player, l1);
+            secondsDeduction = seconds;
+            minutesDeduction += minutes;
+            seconds = minutes = 0;
+
+            pause = new PauseScreen(map);
+            end = null;
         }
     }
 }

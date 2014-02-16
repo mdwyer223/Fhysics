@@ -35,8 +35,15 @@ namespace Fhysics
 
         public void Update(GameTime gameTime)
         {
-            player.Update(gameTime, this);
-            data.Update(gameTime, this);
+            if (Keyboard.GetState().IsKeyDown(Keys.P))
+            {
+                Game1.State = GameState.PAUSE;
+            }
+            else
+            {
+                player.Update(gameTime, this);
+                data.Update(gameTime, this);
+            }
         }
 
         public void Draw(SpriteBatch spriteBatch)
