@@ -26,6 +26,11 @@ namespace Fhysics
             }
         }
 
+        public Vector2 Center
+        {
+            get { return new Vector2(Rec.X + (rec.Width / 2), Rec.Y + (rec.Height / 2)); }
+        }
+
         public Rectangle Rec
         {
             get { return rec; }
