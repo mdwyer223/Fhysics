@@ -43,7 +43,11 @@ namespace Fhysics
             addObject(new Goal(new Rectangle(700, 230, 20, 20)));
             p.Position = new Vector2(5, 230);
             messageText = "Hold shift to pull, walk to push";
+        }
 
+        public override void resetMap(Map map)
+        {
+            map.changeLevel(new Level2(map.Player));
         }
     }
 }

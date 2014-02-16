@@ -140,17 +140,17 @@ namespace Fhysics
                     {
                         Rectangle innerBoxRec = new Rectangle(box.Rec.X + 2, box.Rec.Y + 2, box.Rec.Width - 4, box.Rec.Height - 4);
 
-                        if (futureRec.Intersects(innerBoxRec))
+                        if (Rec.Intersects(innerBoxRec))
                         {
                             velo = Vector2.Zero;
                         }
 
                     }
                     else if (box.Direcs.Contains(Directions.NONE) ||
-                        box.Direcs.Contains(Directions.TOP) && Rec.Y <= box.Rec.Y + box.Rec.Height ||
-                        box.Direcs.Contains(Directions.DOWN) && Rec.Y + Rec.Height > box.Rec.Y ||
-                        box.Direcs.Contains(Directions.LEFT) && Rec.X < box.Rec.X + box.Rec.Width ||
-                        box.Direcs.Contains(Directions.RIGHT) && Rec.X + Rec.Width >= box.Rec.X)
+                        box.Direcs.Contains(Directions.TOP) && Rec.Y <= box.Rec.Y + box.Rec.Height - 3 ||
+                        box.Direcs.Contains(Directions.DOWN) && Rec.Y + Rec.Height >= box.Rec.Y + 3 ||
+                        box.Direcs.Contains(Directions.LEFT) && Rec.X <= box.Rec.X + box.Rec.Width - 3 ||
+                        box.Direcs.Contains(Directions.RIGHT) && Rec.X + Rec.Width >= box.Rec.X + 3)
                     {
                         velo = Vector2.Zero;
                     }
