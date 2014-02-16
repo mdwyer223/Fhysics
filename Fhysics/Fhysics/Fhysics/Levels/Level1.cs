@@ -27,6 +27,12 @@ namespace Fhysics
             IceStrip ice = new IceStrip(new Rectangle(240, 240, 50, 50));
             addObject(ice);
 
+            addObject(new Box(new Vector2(200, 200),Directions.ALL, false));
+            addObject(new Box(new Vector2(250, 200), Directions.RIGHT, false));
+            addObject(new Box(new Vector2(300, 300), Directions.LEFT, false));
+            addObject(new Box(new Vector2(350, 350), Directions.DOWN, false));
+            addObject(new Box(new Vector2(400, 400), Directions.TOP, false));
+            addObject(new Box(new Vector2(450, 450), Directions.RIGHT, false));
             addObject(new Goal(new Rectangle(700, 230, 20, 20)));
             messageText = "W, A, S, D movement (Up, Left, Down, Right)";
         }
