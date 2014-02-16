@@ -19,26 +19,30 @@ namespace Fhysics
             : base()
         {
             List<Directions> d = new List<Directions>();
-            Directions dActual = Directions.NONE;
+            Directions dActual = Directions.LEFT;
+            d.Add(dActual);
+            dActual = Directions.TOP;
             d.Add(dActual);
 
-            Box b = new Box(new Vector2(350, 90), d, true);
-            addObject(b);
-            b = new Box(new Vector2(500, 151), d, true);
-            addObject(b);
-            b = new Box(new Vector2(400, 261), d, true);
-            addObject(b);
-            b = new Box(new Vector2(320, 400), d, true);
-            addObject(b);
-            b = new Box(new Vector2(620, 321), d, true);
-            addObject(b);
+            addObject(new Box(new Vector2(200, 150), d, true));
+            //Box b = new Box(new Vector2(350, 90), d, true);
+            //addObject(b);
+            //b = new Box(new Vector2(500, 151), d, true);
+            //addObject(b);
+            //b = new Box(new Vector2(400, 261), d, true);
+            //addObject(b);
+            //b = new Box(new Vector2(320, 400), d, true);
+            //addObject(b);
+            //b = new Box(new Vector2(620, 321), d, true);
+            //addObject(b);
 
-            //addObject(new Box(new Vector2(200, 200),Directions.ALL, false));
-            //addObject(new Box(new Vector2(250, 200), Directions.RIGHT, false));
-            //addObject(new Box(new Vector2(300, 300), Directions.LEFT, false));
-            //addObject(new Box(new Vector2(350, 350), Directions.DOWN, false));
-            //addObject(new Box(new Vector2(400, 400), Directions.TOP, false));
-            //addObject(new Box(new Vector2(450, 450), Directions.RIGHT, false));
+            addObject(new Box(new Vector2(200, 200), Directions.ALL, false));
+            addObject(new Box(new Vector2(250, 200), Directions.RIGHT, false));
+            addObject(new Box(new Vector2(300, 300), Directions.LEFT, false));
+            addObject(new Box(new Vector2(350, 350), Directions.DOWN, false));
+            addObject(new Box(new Vector2(400, 400), Directions.TOP, false));
+            addObject(new Box(new Vector2(450, 450), Directions.RIGHT, false));
+
             addObject(new Goal(new Rectangle(700, 230, 20, 20)));
             messageText = "W, A, S, D movement (Up, Left, Down, Right)";
         }
