@@ -11,5 +11,6 @@ namespace Fhysics
 {
     class Goal : Base
     {
+        public Goal(Rectangle rec) : base(rec) { }
     }
 }
