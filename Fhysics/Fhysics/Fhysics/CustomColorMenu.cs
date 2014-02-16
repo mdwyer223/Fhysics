@@ -124,15 +124,15 @@ namespace Fhysics
 
             if (redDone == false)
             {
-                spriteBatch.DrawString(subtitleFont, "Red Value!\nPress W or S", colorVector, Color.Black);
+                spriteBatch.DrawString(subtitleFont, "Red Value! " + redValue+"\nPress W or S", colorVector, Color.Black);
             }
             if (redDone && greenDone== false)
             {
-                spriteBatch.DrawString(subtitleFont, "Green Value!\nPress W or S", colorVector, Color.Black);
+                spriteBatch.DrawString(subtitleFont, "Green Value! " + greenValue+"\nPress W or S", colorVector, Color.Black);
             }
             if (blueDone == false && redDone && greenDone)
             {
-                spriteBatch.DrawString(subtitleFont, "Blue Value!\nPress W or S", colorVector, Color.Black);
+                spriteBatch.DrawString(subtitleFont, "Blue Value! " + blueValue+"\nPress W or S", colorVector, Color.Black);
             }
             
         }
