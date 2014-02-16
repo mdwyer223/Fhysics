@@ -24,7 +24,13 @@ namespace Fhysics
         SpriteFont subtitleFont;
         byte redIntensity = 0;
         bool redCountingUp = true;
-        
+        Color redString;
+        byte greenIntensity = 0;
+        Color greenString;
+        bool greenCountingUp = true;
+        byte blueIntensity = 0;
+        bool blueCountingUp = true;
+        Color blueString; 
         
         
         //player
@@ -42,7 +48,12 @@ namespace Fhysics
         //start menu text
         string start = "Fhysics!";
         string begin = "Press space to start!";
-        string colorChoice = "Pick a color\n 1.Red \n 2.Blue\n 3.Green\n 4.White\n 5.Custom \n ";
+        string colorChoice = "Pick a color";
+        string redChoice = "1.Red";
+        string blueChoice = "2.Blue";
+        string greenChoice = "3.Green";
+        string whiteChoice = "4.White";
+        string randomChoice = "5.Custom";
         Vector2 beginTextVector;
         Vector2 startTextVector;
         
@@ -102,10 +113,12 @@ namespace Fhysics
             startFont = Game1.gameContent.Load<SpriteFont>("StartMenu");
             subtitleFont = Game1.gameContent.Load<SpriteFont>("Subtitle");
             Vector2 startStringWidth = startFont.MeasureString(start);
-            Vector2 colorStringWidth = startFont.MeasureString(colorChoice);
+            string stringToMeasure = colorChoice + "\n" + redChoice + "\n" + greenChoice + "\n" + blueChoice + "\n" + whiteChoice + "\n" + randomChoice;
+            Vector2 colorStringWidth = startFont.MeasureString(stringToMeasure);
+                //startFont.MeasureString(colorChoice) +startFont.MeasureString(redChoice) + startFont.MeasureString(greenChoice) + startFont.MeasureString(blueChoice)+ startFont.MeasureString(whiteChoice)+ startFont.MeasureString(randomChoice);
             //startTextVector.X -= startStringWidth.X / 2;
             //startTextVector.Y -= startStringWidth.Y/2;
-            colorChoiceVector.X -= colorStringWidth.X;
+           colorChoiceVector.X -= colorStringWidth.X;
             colorChoiceVector.Y -= colorStringWidth.Y;
             
            // playerRec.X -= (int)playerRec.Width/2;
@@ -151,6 +164,25 @@ namespace Fhysics
                     redIntensity+=5; 
                 else 
                     redIntensity-=5;
+                redString = new Color(redIntensity, 0, 0);
+
+                if (greenIntensity == 255) 
+                    greenCountingUp = false;
+                if (greenIntensity == 0) 
+                    greenCountingUp = true;
+                if (greenCountingUp) 
+                    greenIntensity+=5; 
+                else greenIntensity-=5;
+                greenString= new Color (0,greenIntensity,0);
+
+                if (blueIntensity == 255) 
+                    blueCountingUp = false;
+                if (blueIntensity == 0) 
+                    blueCountingUp = true;
+                if (blueCountingUp) 
+                    blueIntensity+=5; 
+                else blueIntensity-=5;
+                blueString = new Color(0, 0, blueIntensity);
                 
                 //player color choice
 
@@ -207,12 +239,32 @@ namespace Fhysics
             if (gState == GameState.START)
             {
                 Color startColor;
-                
+                Color white;
+                Color randomColor;
 
-                startColor = new Color(redIntensity, 0,0);
-                spriteBatch.DrawString(startFont, start, startTextVector, startColor);
-                spriteBatch.DrawString(subtitleFont, begin, beginTextVector, startColor);
-                spriteBatch.DrawString(startFont, colorChoice, colorChoiceVector, startColor);
+                startColor = new Color(redIntensity+60, blueIntensity+30,greenIntensity+ 120);
+                redString = new Color(redIntensity, 0, 0);
+                blueString = new Color(0, 0, blueIntensity);
+                greenString = new Color(0, greenIntensity, 0);
+                white= new Color(redIntensity,greenIntensity,blueIntensity);
+                randomColor = new Color(redIntensity+100, greenIntensity+6, blueIntensity+150);
+
+                int layer;
+                for (layer = 0; layer < 5; layer++)
+                {
+                    spriteBatch.DrawString(startFont, start, startTextVector, Color.DodgerBlue);
+                    spriteBatch.DrawString(subtitleFont, begin, beginTextVector, Color.DodgerBlue);
+
+
+                }
+             
+                
+                spriteBatch.DrawString(startFont, colorChoice, colorChoiceVector, Color.DodgerBlue);
+                spriteBatch.DrawString(startFont, redChoice, new Vector2(colorChoiceVector.X, colorChoiceVector.Y+50), redString);
+                spriteBatch.DrawString(startFont, blueChoice, new Vector2(colorChoiceVector.X, colorChoiceVector.Y + 100), blueString);
+                spriteBatch.DrawString(startFont, greenChoice, new Vector2(colorChoiceVector.X,colorChoiceVector.Y +150), greenString);
+                spriteBatch.DrawString(startFont, whiteChoice, new Vector2(colorChoiceVector.X, colorChoiceVector.Y+200), white);
+                spriteBatch.DrawString(startFont, randomChoice, new Vector2(colorChoiceVector.X, colorChoiceVector.Y+250),randomColor);
 
 
                 if (customColorChoice)
