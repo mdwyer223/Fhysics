@@ -9,7 +9,7 @@ using Microsoft.Xna.Framework.Graphics;
 
 namespace Fhysics
 {
-    public enum Directions { RIGHT, LEFT, TOP, DOWN, ALL };
+    public enum Directions { RIGHT, LEFT, TOP, DOWN, ALL, NONE };
 
     public class Box : Base
     {

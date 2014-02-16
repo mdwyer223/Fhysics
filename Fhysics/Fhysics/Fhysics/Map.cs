@@ -41,8 +41,13 @@ namespace Fhysics
 
         public void Draw(SpriteBatch spriteBatch)
         {
-            player.Draw(spriteBatch);
             data.Draw(spriteBatch);
+            player.Draw(spriteBatch);
+        }
+
+        public void changeLevel(MData newData)
+        {
+            data = newData;
         }
     }
 }

@@ -1,6 +1,7 @@
 using System;
 using System.Collections.Generic;
 using System.Linq;
+
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Audio;
 using Microsoft.Xna.Framework.Content;
@@ -11,21 +12,33 @@ using Microsoft.Xna.Framework.Media;
 
 namespace Fhysics
 {
-    /// <summary>
-    /// This is the main type for your game
-    /// </summary>
+    public enum GameState { START, PLAYING, END, PAUSE };
     public class Game1 : Microsoft.Xna.Framework.Game
     {
         GraphicsDeviceManager graphics;
         SpriteBatch spriteBatch;
+        EndScreen end;
         Map map;
 
+        //levels
+        static int level;
+
         //make a timer
+        static string timer;
+        float minutes, seconds;
+        SpriteFont timeFont;
 
         static ContentManager gameContent;
         public static ContentManager GameContent
         {
             get { return gameContent; }
+        }
+
+        static GameState gState = GameState.PLAYING;
+        public static GameState State
+        {
+            get { return gState; }
+            set { gState = value; }
         }
 
         static int displayHeight, displayWidth;
@@ -41,19 +54,38 @@ namespace Fhysics
             get { return displayWidth; }
         }
 
+        static string lossInfo;
+        public static string LossText
+        {
+            get { return lossInfo; }
+            set { lossInfo = value; }
+        }
+
+        public static string Time
+        {
+            get { return timer; }
+        }
+
+        public static int LevelPassed
+        {
+            get { return level; }
+            set { level = value; }
+        }
+
         public Game1()
         {
             graphics = new GraphicsDeviceManager(this);
             Content.RootDirectory = "Content";
 
             gameContent = Content;
-            displayWidth = GraphicsDevice.Viewport.Width;
-            displayHeight = GraphicsDevice.Viewport.Height;
         }
 
         protected override void Initialize()
         {
-            Player player = new Player(new Vector2(0, 230), Color.Purple);
+            displayWidth = GraphicsDevice.Viewport.Width;
+            displayHeight = GraphicsDevice.Viewport.Height;
+
+            Player player = new Player(new Vector2(5, 230), Color.Purple);
             Level1 l1 = new Level1();
             map = new Map(player, l1);
 
@@ -65,7 +97,7 @@ namespace Fhysics
             // Create a new SpriteBatch, which can be used to draw textures.
             spriteBatch = new SpriteBatch(GraphicsDevice);
 
-            // TODO: use this.Content to load your game content here
+            timeFont = Content.Load<SpriteFont>("Time");
         }
 
         protected override void Update(GameTime gameTime)
@@ -73,21 +105,69 @@ namespace Fhysics
             // Allows the game to exit
             if (GamePad.GetState(PlayerIndex.One).Buttons.Back == ButtonState.Pressed)
                 this.Exit();
+            if (State == GameState.START)
+            {
+            }
+            else if (State == GameState.PLAYING)
+            {
+                map.Update(gameTime);
+                seconds = gameTime.TotalGameTime.Seconds;
+                minutes = gameTime.TotalGameTime.Minutes;
+                if (seconds < 10)
+                {
+                    timer = "" + (int)minutes + ":0" + (int)seconds;
+                }
+                else
+                {
+                    timer = "" + (int)minutes + ":" + (int)seconds;
+                }
+            }
+            else if (State == GameState.END)
+            {
+                end = new EndScreen(LevelPassed);
+                end.Update(gameTime);
+            }
+            else if (State == GameState.PAUSE)
+            {
 
-            map.Update(gameTime);
+            }
 
             base.Update(gameTime);
         }
 
         protected override void Draw(GameTime gameTime)
         {
-            GraphicsDevice.Clear(Color.CornflowerBlue);
+            GraphicsDevice.Clear(Color.Gray);
 
-            spriteBatch.Begin();
+            if (State == GameState.START)
+            {
 
-            map.Draw(spriteBatch);
+            }
+            else if (State == GameState.PLAYING)
+            {
+                spriteBatch.Begin();
 
-            spriteBatch.End();
+                map.Draw(spriteBatch);
+
+                spriteBatch.DrawString(timeFont, timer, new Vector2(800 - timeFont.MeasureString(timer).X, 5), Color.Red);
+
+                spriteBatch.End();
+            }
+            else if (State == GameState.END)
+            {
+                if (end != null)
+                {
+                    spriteBatch.Begin();
+                    end.Draw(spriteBatch);
+                    spriteBatch.End();
+                }
+            }
+            else if (State == GameState.PAUSE)
+            {
+
+            }
+
+            
 
             base.Draw(gameTime);
         }

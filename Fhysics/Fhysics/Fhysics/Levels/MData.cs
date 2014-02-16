@@ -16,6 +16,11 @@ namespace Fhysics
     public class MData
     {
         List<Base> objs;
+        SpriteFont font;
+        protected bool passed;
+        protected string messageText;
+        protected Vector2 textPos;
+
         public List<Base> AllObjects
         {
             get { return objs; }
@@ -24,6 +29,7 @@ namespace Fhysics
         public MData()
         {
             objs = new List<Base>();
+            font = Game1.GameContent.Load<SpriteFont>("Message");
             addObject(new Wall(new Rectangle(-20, 0, 20, Game1.DisplayHeight)));
             addObject(new Wall(new Rectangle(Game1.DisplayWidth, 0, 20, Game1.DisplayHeight)));
             addObject(new Wall(new Rectangle(0, -20, Game1.DisplayWidth, 20)));
@@ -33,6 +39,7 @@ namespace Fhysics
         public MData(Player p)
         {
             objs = new List<Base>();
+            font = Game1.GameContent.Load<SpriteFont>("Message");
             addObject(new Wall(new Rectangle(-20, 0, 20, Game1.DisplayHeight)));
             addObject(new Wall(new Rectangle(Game1.DisplayWidth, 0, 20, Game1.DisplayHeight)));
             addObject(new Wall(new Rectangle(0, -20, Game1.DisplayWidth, 20)));
@@ -46,6 +53,13 @@ namespace Fhysics
                 if (objs[i] != null)
                 {
                     objs[i].Update(gameTime, map);
+                    if (objs[i].GetType() == typeof(Goal))
+                    {
+                        if (objs[i].Rec.Intersects(map.Player.Rec))
+                        {
+                            passed = true;
+                        }
+                    }
                 }
             }
         }
@@ -56,11 +70,20 @@ namespace Fhysics
             {
                 b.Draw(spriteBatch);
             }
+            if (messageText != null)
+            {
+                spriteBatch.DrawString(font, messageText, new Vector2(5, Game1.DisplayHeight - 30), Color.Blue);
+            }
         }
 
         public void addObject(Base o)
         {
             objs.Add(o);
+        }
+
+        public virtual void resetMap(Map map)
+        {
+            map.changeLevel(new MData());
         }
     }
 }

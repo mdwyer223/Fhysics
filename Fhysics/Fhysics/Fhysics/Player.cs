@@ -13,6 +13,7 @@ namespace Fhysics
     public class Player : Base
     {
         private bool isDead;
+        private int level;
 
         KeyboardState keys, oldKeys;
 
@@ -20,6 +21,11 @@ namespace Fhysics
         {
             get { return isDead; }
             set { isDead = value; }
+        }
+
+        public int Level
+        {
+            get { return level; }
         }
 
         public Vector2 Velocity
@@ -38,7 +44,14 @@ namespace Fhysics
         {
             keys = Keyboard.GetState();
             if (isDead)
+            {
+                Game1.State = GameState.END;
                 return;
+            }
+            else
+            {
+                Game1.LevelPassed = level;
+            }
 
             // Movement code
             const int SPEED = 3;
@@ -74,5 +87,9 @@ namespace Fhysics
             oldKeys = keys;
         }
 
+        public void levelUp()
+        {
+            level++;
+        }
     }
 }
