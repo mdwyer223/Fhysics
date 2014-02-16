@@ -33,6 +33,12 @@ namespace Fhysics
             get { return velo; }
         }
 
+        public Color Color
+        {
+            get { return color; }
+            set { color = value; }
+        }
+
         public Player(Vector2 pos, Color color)
             : base(new Rectangle((int)pos.X, (int)pos.Y, 20, 20))
         {

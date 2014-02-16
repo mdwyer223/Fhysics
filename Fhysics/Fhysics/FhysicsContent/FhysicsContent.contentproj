@@ -49,14 +49,12 @@
     </Compile>
   </ItemGroup>
   <ItemGroup>
-
     <Compile Include="turret.png">
       <Name>turret</Name>
       <Importer>TextureImporter</Importer>
       <Processor>TextureProcessor</Processor>
     </Compile>
-    </ItemGroup>
-
+  </ItemGroup>
   <ItemGroup>
     <Compile Include="ArrowUp.png">
       <Name>ArrowUp</Name>
@@ -100,10 +98,32 @@
     </Compile>
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="StartMenu.spritefont">
+      <Name>StartMenu</Name>
+      <Importer>FontDescriptionImporter</Importer>
+      <Processor>FontDescriptionProcessor</Processor>
+      <SubType>Designer</SubType>
+    </Compile>
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="player.png">
+      <Name>player</Name>
+      <Importer>TextureImporter</Importer>
+      <Processor>TextureProcessor</Processor>
+    </Compile>
+  </ItemGroup>
+  <ItemGroup>
     <Compile Include="ArrowLeft.png">
       <Name>ArrowLeft</Name>
       <Importer>TextureImporter</Importer>
       <Processor>TextureProcessor</Processor>
+    </Compile>
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="Subtitle.spritefont">
+      <Name>Subtitle</Name>
+      <Importer>FontDescriptionImporter</Importer>
+      <Processor>FontDescriptionProcessor</Processor>
     </Compile>
   </ItemGroup>
   <Import Project="$(MSBuildExtensionsPath)\Microsoft\XNA Game Studio\$(XnaFrameworkVersion)\Microsoft.Xna.GameStudio.ContentPipeline.targets" />

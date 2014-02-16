@@ -13,7 +13,7 @@
     <TargetFrameworkProfile>Client</TargetFrameworkProfile>
     <XnaFrameworkVersion>v4.0</XnaFrameworkVersion>
     <XnaPlatform>Windows</XnaPlatform>
-    <XnaProfile>HiDef</XnaProfile>
+    <XnaProfile>Reach</XnaProfile>
     <XnaCrossPlatformGroupID>324591dc-e37a-48e8-845e-18c84fd0ffc2</XnaCrossPlatformGroupID>
     <XnaOutputType>Game</XnaOutputType>
     <ApplicationIcon>Game.ico</ApplicationIcon>
@@ -110,6 +110,7 @@
     <Compile Include="Base.cs" />
     <Compile Include="Box.cs" />
     <Compile Include="EndScreen.cs" />
+    <Compile Include="CustomColorMenu.cs" />
     <Compile Include="Fan.cs" />
     <Compile Include="Gap.cs" />
     <Compile Include="Goal.cs" />
