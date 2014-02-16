@@ -26,7 +26,7 @@ namespace Fhysics
             addObject(b);
             b = new Box(new Vector2(500, 151), d, true);
             addObject(b);
-            b = new Box(new Vector2(400, 261), d, true);
+            b = new Box(new Vector2(400, 230), d, true);
             addObject(b);
             b = new Box(new Vector2(320, 400), d, true);
             addObject(b);
@@ -54,7 +54,7 @@ namespace Fhysics
             addObject(b);
             b = new Box(new Vector2(500, 151), d, true);
             addObject(b);
-            b = new Box(new Vector2(400, 261), d, true);
+            b = new Box(new Vector2(400, 230), d, true);
             addObject(b);
             b = new Box(new Vector2(320, 400), d, true);
             addObject(b);

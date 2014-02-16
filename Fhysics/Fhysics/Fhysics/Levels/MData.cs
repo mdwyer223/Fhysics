@@ -53,11 +53,14 @@ namespace Fhysics
                 if (objs[i] != null)
                 {
                     objs[i].Update(gameTime, map);
-                    if (objs[i].GetType() == typeof(Goal))
+                    if (i <= objs.Count - 1)
                     {
-                        if (objs[i].Rec.Intersects(map.Player.Rec))
+                        if (objs[i].GetType() == typeof(Goal))
                         {
-                            passed = true;
+                            if (objs[i].Rec.Intersects(map.Player.Rec))
+                            {
+                                passed = true;
+                            }
                         }
                     }
                 }

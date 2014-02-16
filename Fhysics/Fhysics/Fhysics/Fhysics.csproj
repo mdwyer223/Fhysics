@@ -117,6 +117,8 @@
     <Compile Include="IceStrip.cs" />
     <Compile Include="Levels\Level1.cs" />
     <Compile Include="Levels\Level2.cs" />
+    <Compile Include="Levels\Level3.cs" />
+    <Compile Include="Levels\Level4.cs" />
     <Compile Include="Map.cs" />
     <Compile Include="Levels\MData.cs" />
     <Compile Include="Particle.cs" />

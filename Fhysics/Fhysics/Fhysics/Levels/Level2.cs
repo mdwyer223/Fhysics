@@ -45,6 +45,16 @@ namespace Fhysics
             messageText = "Hold shift to pull, walk to push";
         }
 
+        public override void Update(GameTime gameTime, Map map)
+        {
+            if (passed)
+            {
+                map.Player.levelUp();
+                map.changeLevel(new Level3(map.Player));
+            }
+            base.Update(gameTime, map);
+        }
+
         public override void resetMap(Map map)
         {
             map.changeLevel(new Level2(map.Player));
