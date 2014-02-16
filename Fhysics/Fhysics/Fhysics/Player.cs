@@ -12,7 +12,7 @@ namespace Fhysics
 {
     public class Player : Base
     {
-        private bool isDead;
+        private bool isDead, onIce;
         private int level;
 
         KeyboardState keys, oldKeys;
@@ -52,6 +52,21 @@ namespace Fhysics
             {
                 Game1.LevelPassed = level;
             }
+            List<Base> o = data.Data.AllObjects;
+            for(int i = 0; i<o.Count;i++)
+            {
+                if(o[i] != null && o[i].GetType() == typeof(IceStrip))
+                {
+                    if (o[i].Rec.Intersects(Rec))
+                    {
+                        onIce = true;
+                    }
+                    else
+                    {
+                        onIce = false;
+                    }
+                }
+            }
 
             // Movement code
             const int SPEED = 3;
@@ -73,9 +88,14 @@ namespace Fhysics
             }
             else
             {
-                //ice
-                //vel*= .95f;
-                velo = Vector2.Zero;
+                if (onIce)
+                {
+                    velo *= .95f;
+                }
+                else
+                {
+                    velo = Vector2.Zero;
+                }
             }
             
             

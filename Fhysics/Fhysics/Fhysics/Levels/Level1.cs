@@ -24,6 +24,9 @@ namespace Fhysics
 
             //addObject(new Gap(new Rectangle(500, 0, 25, Game1.DisplayHeight)));
 
+            IceStrip ice = new IceStrip(new Rectangle(240, 240, 50, 50));
+            addObject(ice);
+
             addObject(new Goal(new Rectangle(700, 230, 20, 20)));
             messageText = "W, A, S, D movement (Up, Left, Down, Right)";
         }
