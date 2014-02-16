@@ -116,8 +116,8 @@ namespace Fhysics
 
             Player player = new Player(new Vector2(5, 230), Color.Purple);
                                
-            Level1 l1 = new Level1();
-            map = new Map(player, l1);
+            
+            map = new Map(player, new Level1(player));
 
             pause = new PauseScreen(map);
 
@@ -294,7 +294,7 @@ namespace Fhysics
 
                 map.Draw(spriteBatch);
 
-                spriteBatch.DrawString(timeFont, timer, new Vector2(800 - timeFont.MeasureString(timer).X, 5), Color.Red);
+                spriteBatch.DrawString(timeFont, timer + "\n Level: " + level, new Vector2(800 - timeFont.MeasureString("Level: 999").X, 5), Color.Red);
 
                 spriteBatch.End();
             }

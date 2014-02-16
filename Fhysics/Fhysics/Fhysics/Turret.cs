@@ -45,7 +45,7 @@ namespace Fhysics
                     List<Base> objs = data.Data.AllObjects;
                     for (int j = 0; j < objs.Count; j++)
                     {
-                        if (objs[j] != null && !objs[j].Equals(this) && objs.GetType() != typeof(Player))
+                        if (objs[j] != null && !objs[j].Equals(this) && (objs[j].GetType() == typeof(Box)))
                         {
                             if (projectiles[i].Rec.Intersects(objs[j].Rec))
                             {

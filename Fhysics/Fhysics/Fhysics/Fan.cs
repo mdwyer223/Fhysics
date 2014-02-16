@@ -48,7 +48,7 @@ namespace Fhysics
             }
             else if (d == Orientation.DOWN)
             {
-                zone = new Rectangle(rec.X, rec.Y, rec.Width, Game1.DisplayHeight - rec.Y);
+                zone = new Rectangle(rec.X, rec.Y, rec.Width, Game1.DisplayHeight - (rec.Y + rec.Height));
                 appliedVelo = new Vector2(0, 5);
             }
 
@@ -88,7 +88,7 @@ namespace Fhysics
                     Box b = (Box)objs[j];
                     if (b.Rec.Intersects(zone))
                     {
-                        switch (direction)
+                        switch (this.direction)
                         {
                             case Orientation.UP:
                                 {
@@ -129,7 +129,7 @@ namespace Fhysics
                                 {
                                     if (b.Direcs.Contains(Directions.LEFT))
                                     {
-                                        zone.Width = b.Rec.X - zone.X;
+                                        zone.Width = (b.Rec.X + (b.Rec.Width / 2)) - zone.X;
                                         objInZone = true;
                                     }
                                     else if (b.Direcs.Contains(Directions.NONE))

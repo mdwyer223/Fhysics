@@ -48,6 +48,7 @@ namespace Fhysics
             if (passed)
             {
                 map.changeLevel(new Level4(map.Player));
+                map.Player.levelUp();
             }
             base.Update(gameTime, map);
         }

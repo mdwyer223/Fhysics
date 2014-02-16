@@ -24,7 +24,7 @@ namespace Fhysics
 
             Vector2 pos = new Vector2(2, 300);
             Directions d = Directions.TOP;
-            for (int i = 0; i < 6; i++)
+            for (int i = 0; i < 18; i++)
             {
                 addObject(new Box(pos, d, true));
                 d = Directions.NONE;
@@ -37,6 +37,11 @@ namespace Fhysics
 
         public override void Update(GameTime gameTime, Map map)
         {
+            if (passed)
+            {
+                map.changeLevel(new Level5(map.Player));
+                map.Player.levelUp();
+            }
             base.Update(gameTime, map);
         }
 
