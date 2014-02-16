@@ -220,21 +220,7 @@ namespace Fhysics
                 miliseconds += gameTime.ElapsedGameTime.Milliseconds / 1000f;
                 map.Update(gameTime);
                 seconds = (int)miliseconds;
-                minutes = seconds / 60;
-
-                if (miliseconds > 60)
-                {
-                    miliseconds = 0f;
-                }
-
-                if (seconds < 10)
-                {
-                    timer = "" + (int)minutes + ":0" + (int)seconds;
-                }
-                else
-                {
-                    timer = "" + (int)minutes + ":" + (int)seconds;
-                }
+                timer = seconds + " secs";
             }
             else if (State == GameState.END)
             {
@@ -267,12 +253,10 @@ namespace Fhysics
                 spriteBatch.Begin();
                 Color startColor;
 
-
                 startColor = new Color(redIntensity, 0, 0);
                 spriteBatch.DrawString(startFont, start, startTextVector, startColor);
                 spriteBatch.DrawString(subtitleFont, begin, beginTextVector, startColor);
                 spriteBatch.DrawString(startFont, colorChoice, colorChoiceVector, startColor);
-
 
                 if (customColorChoice)
                 {
