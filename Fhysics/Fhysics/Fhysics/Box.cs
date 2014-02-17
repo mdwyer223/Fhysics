@@ -19,7 +19,6 @@ namespace Fhysics
 
         Rectangle futureRec;
         
-        Rectangle top, left, bottom, right;
         public bool canMoveUp, canMoveDown, canMoveRight, canMoveLeft;
 
         public Rectangle TopRec
@@ -84,28 +83,36 @@ namespace Fhysics
             keys = Keyboard.GetState();
             if (isPush)
             {
-                if (playerRec.Intersects(this.rec))
+                Rectangle outerRec = new Rectangle(LeftRec.X, TopRec.Y, Rec.Width + LeftRec.Width + RightRec.Width, Rec.Height + TopRec.Height + DownRec.Height);
+
+                if (directions.Contains(Directions.TOP) && playerRec.Intersects(DownRec) ||
+                    directions.Contains(Directions.DOWN) && playerRec.Intersects(TopRec) || 
+                    directions.Contains(Directions.ALL) && playerRec.Intersects(outerRec))
                 {
-                    if (directions.Contains(Directions.TOP) || directions.Contains(Directions.DOWN) || directions.Contains(Directions.ALL))
-                    {
-                        velo.Y = data.Player.Velocity.Y;
-                    }
-                    if (directions.Contains(Directions.RIGHT) || directions.Contains(Directions.LEFT) || directions.Contains(Directions.ALL))
-                    {
-                        velo.X = data.Player.Velocity.X;
-                    }
+                    velo.Y = data.Player.Velocity.Y;
                 }
                 else
                 {
-                    velo = Vector2.Zero;
+                    velo.Y = 0;
+                }
+
+                if (directions.Contains(Directions.RIGHT) && playerRec.Intersects(LeftRec) ||
+                    directions.Contains(Directions.LEFT) && playerRec.Intersects(RightRec) ||
+                    directions.Contains(Directions.ALL) && playerRec.Intersects(outerRec))
+                {
+                    velo.X = data.Player.Velocity.X;
+                }
+                else
+                {
+                    velo.X = 0;
                 }
             }
             else
             {
                 if (keys.IsKeyDown(Keys.LeftShift))
                 {
-                    if (directions.Contains(Directions.LEFT) && playerRec.Intersects(LeftRec) || directions.Contains(Directions.RIGHT) && playerRec.Intersects(RightRec)
-                        || directions.Contains(Directions.ALL))
+                    if (directions.Contains(Directions.LEFT) && playerRec.Intersects(LeftRec) || 
+                        directions.Contains(Directions.RIGHT) && playerRec.Intersects(RightRec) || directions.Contains(Directions.ALL))
                     {
                         velo.X = data.Player.Velocity.X;
                     }
@@ -114,8 +121,8 @@ namespace Fhysics
                         velo.X = 0;
                     }
 
-                    if (directions.Contains(Directions.TOP) && playerRec.Intersects(TopRec) || directions.Contains(Directions.DOWN) && playerRec.Intersects(DownRec)
-                        || directions.Contains(Directions.ALL))
+                    if (directions.Contains(Directions.TOP) && playerRec.Intersects(TopRec) || 
+                        directions.Contains(Directions.DOWN) && playerRec.Intersects(DownRec) || directions.Contains(Directions.ALL))
                     {
                         velo.Y = data.Player.Velocity.Y;
                     }
@@ -159,30 +166,24 @@ namespace Fhysics
                 {
                     if (IsPush)
                     {
-                        Rectangle top, left, bottom, right;
-                        top = new Rectangle(Rec.X + 4, Rec.Y - 2, Rec.Width - 8, 2);
-                        bottom = new Rectangle(Rec.X + 4, Rec.Y + Rec.Height, Rec.Width - 8, 2);
-
-                        left = new Rectangle(Rec.X - 2, Rec.Y + 4, 2, Rec.Height - 8);
-                        right = new Rectangle(Rec.X + Rec.Width, Rec.Y + 4, 1, Rec.Height - 8);
 
                         if (directions.Contains(Directions.TOP) || directions.Contains(Directions.ALL))
-                            canMoveUp = canMoveUp && !obj.Rec.Intersects(top);
+                            canMoveUp = canMoveUp && !obj.Rec.Intersects(TopRec);
                         else
                             canMoveUp = false;
 
                         if (directions.Contains(Directions.DOWN) || directions.Contains(Directions.ALL))
-                            canMoveDown = canMoveDown && !obj.Rec.Intersects(bottom);
+                            canMoveDown = canMoveDown && !obj.Rec.Intersects(DownRec);
                         else
                             canMoveDown = false;
 
                         if (directions.Contains(Directions.LEFT) || directions.Contains(Directions.ALL))
-                            canMoveLeft = canMoveLeft && !obj.Rec.Intersects(left);
+                            canMoveLeft = canMoveLeft && !obj.Rec.Intersects(LeftRec);
                         else
                             canMoveLeft = false;
 
                         if (directions.Contains(Directions.RIGHT) || directions.Contains(Directions.ALL))
-                            canMoveRight = canMoveRight && !obj.Rec.Intersects(right);
+                            canMoveRight = canMoveRight && !obj.Rec.Intersects(RightRec);
                         else
                             canMoveRight = false;
                     }
@@ -208,6 +209,7 @@ namespace Fhysics
                         else
                             canMoveRight = false;
                     }
+                        
 
                 }
             }

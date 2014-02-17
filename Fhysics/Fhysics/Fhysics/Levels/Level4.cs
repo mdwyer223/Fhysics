@@ -31,7 +31,7 @@ namespace Fhysics
                 pos.X += 25;
             }
 
-            addObject(new Box(new Vector2(2, 220), Directions.RIGHT, false));
+            addObject(new Box(new Vector2(5, 220), Directions.RIGHT, false));
             addObject(new Goal(new Rectangle(20, 50, 20, 20)));
         }
 

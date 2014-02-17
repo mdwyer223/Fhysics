@@ -55,7 +55,12 @@ namespace Fhysics
 
             addObject(new Box(new Vector2(290, 100), Directions.DOWN, true));
             addObject(new Box(new Vector2(290, 50), Directions.DOWN, true));
-            addObject(new Box(new Vector2(320, 100), new List<Directions> { Directions.DOWN, Directions.LEFT }, true));
+            List<Directions> blarg = new List<Directions>();
+            blarg.Add(Directions.DOWN);
+            blarg.Add(Directions.LEFT);
+
+
+            addObject(new Box(new Vector2(320, 100), blarg, true));
 
             addObject(new Goal(new Rectangle(290, 243, 20, 20)));
         }

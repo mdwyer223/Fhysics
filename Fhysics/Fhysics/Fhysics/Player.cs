@@ -149,57 +149,57 @@ namespace Fhysics
                     futureRec.Intersects(obj.Rec))
                 {
                     Box box = (Box)obj;
-                    if (box.Direcs.Contains(Directions.NONE))
-                    {
+                    //if (box.Direcs.Contains(Directions.NONE))
+                    //{
                         velo = Vector2.Zero;
                         canMoveDown = canMoveUp = canMoveLeft = canMoveRight = false;
-                        break;
-                    }
+                        
+                    //}
 
-                    if (box.IsPush)
-                    {
-                        //Rectangle innerRec = new Rectangle(box.Rec.X + 2, box.Rec.Y + 2, box.Rec.X + box.Rec.Width - 4, box.Rec.Y + box.Rec.Height - 4);
+                    //if (box.IsPush)
+                    //{
+                    //    //Rectangle innerRec = new Rectangle(box.Rec.X + 2, box.Rec.Y + 2, box.Rec.X + box.Rec.Width - 4, box.Rec.Y + box.Rec.Height - 4);
                         
 
-                        if (box.Direcs.Contains(Directions.TOP) || box.Direcs.Contains(Directions.ALL))
-                            canMoveUp = canMoveUp && box.canMoveUp;
-                        else
-                            canMoveUp = false;
+                    //    if (box.Direcs.Contains(Directions.TOP) || box.Direcs.Contains(Directions.ALL))
+                    //        canMoveUp = canMoveUp && box.canMoveUp;
+                    //    else
+                    //        canMoveUp = false;
 
-                        if (box.Direcs.Contains(Directions.DOWN) || box.Direcs.Contains(Directions.ALL))
-                            canMoveDown = canMoveDown && box.canMoveDown;
-                        else
-                            canMoveDown = false;
+                    //    if (box.Direcs.Contains(Directions.DOWN) || box.Direcs.Contains(Directions.ALL))
+                    //        canMoveDown = canMoveDown && box.canMoveDown;
+                    //    else
+                    //        canMoveDown = false;
 
-                        if (box.Direcs.Contains(Directions.LEFT) || box.Direcs.Contains(Directions.ALL))
-                            canMoveLeft = canMoveLeft && box.canMoveLeft;
-                        else
-                            canMoveLeft = false;
+                    //    if (box.Direcs.Contains(Directions.LEFT) || box.Direcs.Contains(Directions.ALL))
+                    //        canMoveLeft = canMoveLeft && box.canMoveLeft;
+                    //    else
+                    //        canMoveLeft = false;
 
-                        if (box.Direcs.Contains(Directions.RIGHT) || box.Direcs.Contains(Directions.ALL))
-                            canMoveRight = canMoveRight && box.canMoveRight;
-                        else
-                            canMoveRight = false;
-                    }
-                    else
-                    {
+                    //    if (box.Direcs.Contains(Directions.RIGHT) || box.Direcs.Contains(Directions.ALL))
+                    //        canMoveRight = canMoveRight && box.canMoveRight;
+                    //    else
+                    //        canMoveRight = false;
+                    //}
+                    //else
+                    //{
                         
-                        if (!keys.IsKeyDown(Keys.LeftShift) || futureRec.Intersects(box.Rec))                        
-                        {
-                            velo = Vector2.Zero;
-                            canMoveDown = canMoveUp = canMoveLeft = canMoveRight = false;
-                            break;
-                        }
+                    //    if (!keys.IsKeyDown(Keys.LeftShift) || futureRec.Intersects(box.Rec))                        
+                    //    {
+                    //        velo = Vector2.Zero;
+                    //        canMoveDown = canMoveUp = canMoveLeft = canMoveRight = false;
+                    //        break;
+                    //    }
 
-                        canMoveDown = Rec.Intersects(box.DownRec) && box.Direcs.Contains(Directions.DOWN) || box.Direcs.Contains(Directions.ALL);
+                    //    canMoveDown = Rec.Intersects(box.DownRec) && box.Direcs.Contains(Directions.DOWN) || box.Direcs.Contains(Directions.ALL);
 
-                        canMoveUp = Rec.Intersects(box.TopRec) && box.Direcs.Contains(Directions.TOP) || box.Direcs.Contains(Directions.ALL);
+                    //    canMoveUp = Rec.Intersects(box.TopRec) && box.Direcs.Contains(Directions.TOP) || box.Direcs.Contains(Directions.ALL);
 
-                        canMoveRight = Rec.Intersects(box.RightRec) && box.Direcs.Contains(Directions.RIGHT) || box.Direcs.Contains(Directions.ALL);
+                    //    canMoveRight = Rec.Intersects(box.RightRec) && box.Direcs.Contains(Directions.RIGHT) || box.Direcs.Contains(Directions.ALL);
 
-                        canMoveLeft = Rec.Intersects(box.LeftRec) && box.Direcs.Contains(Directions.LEFT) || box.Direcs.Contains(Directions.ALL);
+                    //    canMoveLeft = Rec.Intersects(box.LeftRec) && box.Direcs.Contains(Directions.LEFT) || box.Direcs.Contains(Directions.ALL);
                             
-                    }
+                    //}
 
                     
                 }
