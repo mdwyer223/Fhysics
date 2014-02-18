@@ -20,25 +20,26 @@ namespace Fhysics
         Rectangle futureRec;
         
         public bool canMoveUp, canMoveDown, canMoveRight, canMoveLeft;
+        private int invisRecWidth;
 
         public Rectangle TopRec
         {
-            get { return new Rectangle(Rec.X + 4, Rec.Y - 10, Rec.Width - 8, 10); }
+            get { return new Rectangle(Rec.X + 1, Rec.Y - invisRecWidth, Rec.Width - 2, invisRecWidth); }
         }
 
         public Rectangle DownRec
         {
-            get { return new Rectangle(Rec.X + 4, Rec.Y + Rec.Height, Rec.Width - 8, 10); }
+            get { return new Rectangle(Rec.X + 1, Rec.Y + Rec.Height, Rec.Width - 2, invisRecWidth); }
         }
 
         public Rectangle LeftRec
         {
-            get { return new Rectangle(Rec.X - 10, Rec.Y + 4, 10, Rec.Height - 8); }
+            get { return new Rectangle(Rec.X - invisRecWidth, Rec.Y + 1, invisRecWidth, Rec.Height - 2); }
         }
 
         public Rectangle RightRec
         {
-            get{ return new Rectangle(Rec.X + Rec.Width, Rec.Y + 4, 10, Rec.Height - 8); }
+            get { return new Rectangle(Rec.X + Rec.Width, Rec.Y + 1, invisRecWidth, Rec.Height - 2); }
         }
 
         private bool isPush;
@@ -83,11 +84,12 @@ namespace Fhysics
             keys = Keyboard.GetState();
             if (isPush)
             {
-                Rectangle outerRec = new Rectangle(LeftRec.X, TopRec.Y, Rec.Width + LeftRec.Width + RightRec.Width, Rec.Height + TopRec.Height + DownRec.Height);
+                invisRecWidth = 3;
+                Rectangle outerRec = new Rectangle(LeftRec.X, TopRec.Y, Rec.Width + LeftRec.Width + RightRec.Width, Rec.Height + TopRec.Height + DownRec.Height);                
 
                 if (directions.Contains(Directions.TOP) && playerRec.Intersects(DownRec) ||
-                    directions.Contains(Directions.DOWN) && playerRec.Intersects(TopRec) || 
-                    directions.Contains(Directions.ALL) && playerRec.Intersects(outerRec))
+                    directions.Contains(Directions.DOWN) && playerRec.Intersects(TopRec) ||
+                    directions.Contains(Directions.ALL) && (playerRec.Intersects(DownRec) || playerRec.Intersects(TopRec)))
                 {
                     velo.Y = data.Player.Velocity.Y;
                 }
@@ -98,7 +100,7 @@ namespace Fhysics
 
                 if (directions.Contains(Directions.RIGHT) && playerRec.Intersects(LeftRec) ||
                     directions.Contains(Directions.LEFT) && playerRec.Intersects(RightRec) ||
-                    directions.Contains(Directions.ALL) && playerRec.Intersects(outerRec))
+                    directions.Contains(Directions.ALL) && (playerRec.Intersects(LeftRec) || playerRec.Intersects(RightRec)))
                 {
                     velo.X = data.Player.Velocity.X;
                 }
@@ -109,6 +111,7 @@ namespace Fhysics
             }
             else
             {
+                invisRecWidth = 7;
                 if (keys.IsKeyDown(Keys.LeftShift))
                 {
                     if (directions.Contains(Directions.LEFT) && playerRec.Intersects(LeftRec) || 
@@ -138,25 +141,18 @@ namespace Fhysics
 
             canMoveUp = canMoveDown = canMoveLeft = canMoveRight = true;
 
-            futureRec = new Rectangle((int)(rec.X + velo.X), (int)(rec.Y + velo.Y), rec.Width, rec.Height);
-
-            canMoveLeft = LeftRec.X > 0;
-            canMoveRight = RightRec.X + RightRec.Width < Game1.DisplayWidth;
-
-            canMoveUp = TopRec.Y > 0;
-            canMoveDown = DownRec.Y + DownRec.Height < Game1.DisplayHeight;
-
+            futureRec = new Rectangle((int)(rec.X + velo.X), (int)(rec.Y + velo.Y), rec.Width, rec.Height);            
             if (futureRec.X < 0 || futureRec.X + futureRec.Width > Game1.DisplayWidth)
             {
                 velo.X = 0;
-                //canMoveLeft = futureRec.X > 0;
-                //canMoveRight = futureRec.X + futureRec.Width <= Game1.DisplayWidth;
+                canMoveLeft = futureRec.X > 0;
+                canMoveRight = futureRec.X + futureRec.Width <= Game1.DisplayWidth;
             }
             if (futureRec.Y < 0 || futureRec.Y + futureRec.Height > Game1.DisplayHeight)
             {
                 velo.Y = 0;
-                //canMoveUp = futureRec.Y > 0;
-                //canMoveDown = futureRec.Y + futureRec.Height <= Game1.DisplayHeight;
+                canMoveUp = futureRec.Y > 0;
+                canMoveDown = futureRec.Y + futureRec.Height <= Game1.DisplayHeight;
             }
 
             foreach (Base obj in data.Data.AllObjects)

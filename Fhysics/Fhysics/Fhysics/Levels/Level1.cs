@@ -54,7 +54,7 @@ namespace Fhysics
             addObject(b);
             b = new Box(new Vector2(620, 321), d, true);
             addObject(b);
-
+            
             addObject(new Goal(new Rectangle(700, 230, 20, 20)));
 
             //Fan f = new Fan(new Rectangle(200, 100, 50, 50), Orientation.RIGHT);
