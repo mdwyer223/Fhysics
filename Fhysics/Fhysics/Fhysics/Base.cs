@@ -12,7 +12,7 @@ namespace Fhysics
     public class Base
     {
         protected Texture2D texture;
-        protected Vector2 velo; 
+        protected Vector2 velo;  
         protected Rectangle rec;
         protected Color color = Color.White;
 
